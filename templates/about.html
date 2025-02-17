@@ -4,14 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <title>My Website - About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}" />
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='image/armor.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
 </head>
 
-<body style="text-align: center;">
-    <h1>John Garnder</h1>
-    <p>Hello World, my name is John but my GitHub username is Fullmetal404.<br>
-        You may already can tell by my username, I'm fond of anime and programming.<br>
-        I'm currently working on my Git skills and learning about packages and framworks.
-    </p>
+<body>
+    <a href="https://github.com/Fullmetal404" target="_blank">
+        <img src="{{ url_for('static', filename='image/github.jpg') }}" alt="My Image">
+    </a>
+
+    <div id="info">
+        <h1>John Gardner</h1>
+        <p>Hello World, my name is John but my GitHub username is Fullmetal404.<br>
+            You may already can tell by my username, I'm fond of anime and programming.<br>
+            I'm currently working on my Git skills and learning about packages and framworks.
+        </p>
+    </div>
+
+    <div id="audio">
+        <!-- Audio element that plays automatically -->
+        <audio id="myAudio" loop="loop" autoplay="autoplay">
+            <source id="audioSource" src="static/audio/Searching - Nat Keefe.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Play button -->
+        <button onclick="playAudio()">Play</button>
+
+        <!-- Stop button -->
+        <button onclick="stopAudio()">Stop</button>
+
+        <!-- Credit / File name display -->
+        <p id="audioFileName"></p>
+
+        <script>
+            // Get the audio element
+            var audio = document.getElementById("myAudio");
+
+            // Set file name dynamically
+            var filePath = document.getElementById("audioSource").src;
+            var fileName = filePath.substring(filePath.lastIndexOf("/") + 1); // Extracts the file name
+            var decodedFileName = decodeURIComponent(fileName); // Decode the URL-encoded file name
+
+            // Display the decoded file name
+            document.getElementById("audioFileName").textContent = "Audio Credit: " + decodedFileName;
+
+
+            // Play the audio
+            function playAudio() {
+                audio.play();
+            }
+
+            // Stop the audio
+            function stopAudio() {
+                audio.pause();
+                audio.currentTime = 0; // Reset the audio to the start
+            }
+        </script>
+    </div>
+
 </body>
 
 </html
